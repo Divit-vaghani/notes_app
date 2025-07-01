@@ -13,6 +13,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:notes_app/injectable/injectable.dart' as _i15;
 import 'package:notes_app/services/auth_service.dart' as _i830;
+import 'package:notes_app/services/firestore_service.dart' as _i289;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -30,6 +31,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.initializeFireBase(),
       preResolve: true,
     );
+    gh.factory<_i289.FirestoreService>(() => _i289.FirestoreService());
     gh.factory<_i830.AuthService>(() => _i830.AuthService());
     return this;
   }
