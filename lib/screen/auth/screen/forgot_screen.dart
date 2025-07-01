@@ -65,11 +65,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   SizedBox(height: 8.h),
                   Row(
                     children: [
-                      const Text('Already have an account?'),
-                      TextButton(
-                        onPressed: () => router.pop(),
-                        child: const Text('Sign In'),
+                      InkWell(
+                        onTap: () => router.pop(),
+                        child: const Icon(Icons.arrow_back),
                       ),
+                      SizedBox(width: 8.h),
+                      const Text('Already have an account?'),
+                      TextButton(onPressed: () => router.pop(), child: const Text('Sign In')),
                     ],
                   ),
                 ],

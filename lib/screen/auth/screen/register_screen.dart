@@ -26,6 +26,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _confirmPasswordController = TextEditingController();
   bool _isLoading = false;
 
+  bool _obscureTextPassword = true;
+  bool _obscureTextConfirm = true;
+
   final _authService = getIt<AuthService>();
 
   @override
@@ -79,10 +82,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: 8.h),
                 Row(
                   children: [
+                    InkWell(
+                      onTap: () => router.pop(),
+                      child: const Icon(Icons.arrow_back),
+                    ),
+                    SizedBox(width: 8.h),
                     const Text('Already have an account?'),
-                    TextButton(
-                        onPressed: () => router.pop(),
-                        child: const Text('Sign In')),
+                    TextButton(onPressed: () => router.pop(), child: const Text('Sign In')),
                   ],
                 ),
               ]),
@@ -143,10 +149,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       MobileField(controller: _mobileController),
                       SizedBox(height: 16.h),
                       NotesTextField(
+                        passwordField: true,
+                        toggleVisibility: () {
+                          setState(() {
+                            _obscureTextPassword = !_obscureTextPassword;
+                          });
+                        },
                         controller: _passwordController,
                         label: 'Password',
                         hintText: '********',
-                        obscureText: true,
+                        obscureText: _obscureTextPassword,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
@@ -159,10 +171,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       SizedBox(height: 16.h),
                       NotesTextField(
+                        passwordField: true,
+                        toggleVisibility: () {
+                          setState(() {
+                            _obscureTextConfirm = !_obscureTextConfirm;
+                          });
+                        },
                         controller: _confirmPasswordController,
                         label: 'Confirm Password',
                         hintText: '********',
-                        obscureText: true,
+                        obscureText: _obscureTextConfirm,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please confirm your password';
