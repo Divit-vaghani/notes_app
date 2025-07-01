@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes_app/injectable/injectable.dart';
 import 'package:notes_app/model/user_model/user_model.dart';
-import 'package:notes_app/screen/auth/screen/forgot_screen.dart';
-import 'package:notes_app/screen/auth/screen/login_screen.dart';
-import 'package:notes_app/screen/auth/screen/register_screen.dart';
-import 'package:notes_app/screen/home_screen.dart';
+import 'package:notes_app/provider/profile_provider.dart';
+import 'package:notes_app/screen/auth/forgot_screen.dart';
+import 'package:notes_app/screen/auth/login_screen.dart';
+import 'package:notes_app/screen/auth/register_screen.dart';
+import 'package:notes_app/screen/home/home_screen.dart';
 import 'package:notes_app/screen/profile/edit_profile_screen.dart';
 import 'package:notes_app/screen/profile/profile_screen.dart';
 import 'package:notes_app/services/auth_service.dart';
 import 'package:notes_app/widget/notes_navigation.dart';
+import 'package:provider/provider.dart';
 
 final router = GoRouter(
   initialLocation: '/',
@@ -17,8 +19,7 @@ final router = GoRouter(
   redirect: (context, state) {
     final authService = getIt<AuthService>();
     final isLoggedIn = authService.isLoggedIn();
-    final isAuthRoute = state.matchedLocation == '/login' ||
-        state.matchedLocation.startsWith('/login/');
+    final isAuthRoute = state.matchedLocation == '/login' || state.matchedLocation.startsWith('/login/');
 
     if (!isLoggedIn && !isAuthRoute) {
       return '/login';
@@ -83,7 +84,10 @@ final router = GoRouter(
       path: '/edit-profile',
       builder: (context, state) {
         final userModel = state.extra as UserModel;
-        return EditProfileScreen(model: userModel);
+        return ChangeNotifierProvider(
+          create: (context) => ProfileProvider(userModel),
+          builder: (context, child) => const EditProfileScreen(),
+        );
       },
     ),
   ],
