@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notes_app/injectable/injectable.dart';
+import 'package:notes_app/provider/auth/forgot_provider.dart';
+import 'package:notes_app/provider/auth/login_provider.dart';
+import 'package:notes_app/provider/auth/register_provider.dart';
 import 'package:notes_app/provider/note_provider.dart';
 import 'package:notes_app/route_config/route_config.dart';
 import 'package:notes_app/services/auth_service.dart';
@@ -49,6 +52,15 @@ class _ApplicationState extends State<Application> {
     return MultiProvider(
       providers: [
         // Provides the note state manager
+        ChangeNotifierProvider<LoginProvider>(
+          create: (context) => LoginProvider(),
+        ),
+        ChangeNotifierProvider<RegisterProvider>(
+          create: (context) => RegisterProvider(),
+        ),
+        ChangeNotifierProvider<ForgotPasswordProvider>(
+          create: (context) => ForgotPasswordProvider(),
+        ),
         ChangeNotifierProvider<NoteProvider>(
           create: (context) => NoteProvider(getIt<FirestoreService>()),
         ),
