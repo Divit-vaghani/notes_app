@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notes_app/provider/auth/login_provider.dart';
 import 'package:notes_app/route_config/route_config.dart';
 import 'package:notes_app/widget/frosted_back_ground.dart';
-import 'package:notes_app/widget/google_button.dart';
+// import 'package:notes_app/widget/google_button.dart';
 import 'package:notes_app/widget/notes_text_field.dart';
 import 'package:notes_app/widget/primary_button.dart';
 import 'package:provider/provider.dart';
