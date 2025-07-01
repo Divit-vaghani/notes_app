@@ -6,10 +6,8 @@ import 'package:notes_app/injectable/injectable.dart';
 import 'package:notes_app/provider/auth/forgot_provider.dart';
 import 'package:notes_app/provider/auth/login_provider.dart';
 import 'package:notes_app/provider/auth/register_provider.dart';
-import 'package:notes_app/provider/note_provider.dart';
 import 'package:notes_app/route_config/route_config.dart';
 import 'package:notes_app/services/auth_service.dart';
-import 'package:notes_app/services/firestore_service.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
@@ -60,9 +58,6 @@ class _ApplicationState extends State<Application> {
         ),
         ChangeNotifierProvider<ForgotPasswordProvider>(
           create: (context) => ForgotPasswordProvider(),
-        ),
-        ChangeNotifierProvider<NoteProvider>(
-          create: (context) => NoteProvider(getIt<FirestoreService>()),
         ),
       ],
       child: ScreenUtilInit(

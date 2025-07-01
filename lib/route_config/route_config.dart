@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes_app/injectable/injectable.dart';
 import 'package:notes_app/model/user_model/user_model.dart';
+import 'package:notes_app/provider/note_provider.dart';
 import 'package:notes_app/provider/profile_provider.dart';
 import 'package:notes_app/screen/auth/forgot_screen.dart';
 import 'package:notes_app/screen/auth/login_screen.dart';
@@ -10,6 +11,7 @@ import 'package:notes_app/screen/home/home_screen.dart';
 import 'package:notes_app/screen/profile/edit_profile_screen.dart';
 import 'package:notes_app/screen/profile/profile_screen.dart';
 import 'package:notes_app/services/auth_service.dart';
+import 'package:notes_app/services/firestore_service.dart';
 import 'package:notes_app/widget/notes_navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +54,12 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: '/',
-              builder: (context, state) => const HomeScreen(),
+              builder: (context, state) {
+                return ChangeNotifierProvider<NoteProvider>(
+                  create: (context) => NoteProvider(getIt<FirestoreService>()),
+                  builder: (context, child) => const HomeScreen(),
+                );
+              },
             ),
           ],
         ),
