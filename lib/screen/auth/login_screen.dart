@@ -115,18 +115,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: value.login,
                         ),
                         SizedBox(height: 20.h),
-                        Row(
-                          children: [
-                            Expanded(child: Divider(thickness: 1.h)),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.w),
-                              child: const Text('Or login with'),
-                            ),
-                            Expanded(child: Divider(thickness: 1.h)),
-                          ],
-                        ),
-                        SizedBox(height: 20.h),
-                        GoogleButton(isLoading: value.isGoogleLoading, onPressed: value.loginWithGoogle),
+                        // Row(
+                        //   children: [
+                        //     Expanded(child: Divider(thickness: 1.h)),
+                        //     Padding(
+                        //       padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        //       child: const Text('Or login with'),
+                        //     ),
+                        //     Expanded(child: Divider(thickness: 1.h)),
+                        //   ],
+                        // ),
+                        // SizedBox(height: 20.h),
+                        // GoogleButton(isLoading: value.isGoogleLoading, onPressed: value.loginWithGoogle),
                       ],
                     ),
                   ),
